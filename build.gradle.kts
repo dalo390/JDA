@@ -24,7 +24,7 @@ import de.marcphilipp.gradle.nexus.NexusPublishExtension
 import io.codearte.gradle.nexus.BaseStagingTask
 import io.codearte.gradle.nexus.NexusStagingExtension
 import org.apache.tools.ant.filters.ReplaceTokens
-import java.time.Duration
+import java.time.Duration 
 
 // Don't remove this, its needed for reasons....
 typealias Pom = org.gradle.api.publish.maven.MavenPom
@@ -33,6 +33,7 @@ plugins {
     signing
     `java-library`
     `maven-publish`
+    
 
     id("io.codearte.nexus-staging") version "0.30.0"
     id("de.marcphilipp.nexus-publish") version "0.4.0"
@@ -101,7 +102,8 @@ dependencies {
     compileOnly("org.jetbrains:annotations:23.0.0")
 
     //Logger
-    api("org.slf4j:slf4j-api:1.7.36")
+    api("org.slf4j:slf4j-api:1.7.5")
+    api("org.slf4j:slf4j-simple:1.6.4")
 
     //Web Connection Support
     api("com.neovisionaries:nv-websocket-client:2.14")
@@ -125,6 +127,9 @@ dependencies {
     // Match the minor version of lavaplayers jackson dependency
     implementation("com.fasterxml.jackson.core:jackson-core:2.14.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
+
+
+    implementation("net.dv8tion:JDA:5.0.0-beta.3")
 
     //Sets the dependencies for the examples
     configurations["examplesImplementation"].withDependencies {
