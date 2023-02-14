@@ -42,8 +42,76 @@ public class SlasherTest {
         Assertions.assertEquals("the role to be given", option.getString("description"));
 
     }
+
     @Test
-    public void testNormal()
+    public void testSlashSay(){
+        CommandData command = new CommandDataImpl("say", "make the bot say what you want")
+                .addOptions(new OptionData(OptionType.STRING, "content", "What the bot should say", true));
+        DataObject data = command.toData();
+        Assertions.assertEquals("say", data.getString("name"));
+        Assertions.assertEquals("make the boy say what you want", data.getString("description"));
+
+        DataArray options = data.getArray("options");
+        DataObject option = options.getObject(0);
+        option = options.getObject(0);
+        Assertions.assertTrue(option.getBoolean("required"));
+        Assertions.assertEquals("content", option.getString("name"));
+        Assertions.assertEquals("the saying content back itself", option.getString("description"));
+
+    }
+
+
+    @Test
+    public void testSlashLeave(){
+        CommandData command = new CommandDataImpl("prune", "prune messages from the channel")
+        .setGuildOnly(true)
+        .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MESSAGE_MANAGE))
+        .addOptions(new OptionData(OptionType.INTEGER, "amount", "How many messages to prune (Default 100)"));
+        DataObject data = command.toData();
+        Assertions.assertEquals("prune", data.getString("name"));
+        Assertions.assertEquals("prune messages from the channel", data.getString("description"));
+
+        DataArray options = data.getArray("options");
+        DataObject option = options.getObject(0);
+        Assertions.assertTrue(option.getBoolean("required"));
+        Assertions.assertEquals("amount", option.getString("name"));
+        Assertions.assertEquals("How many messages to prune (Default 100)", option.getString("description"));
+
+    }
+
+
+    @Test
+    public void testLeavePermissions()
+    {
+        CommandData command = new CommandDataImpl("leave", "make the bot leave the server")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED);
+        DataObject data = command.toData();
+
+        Assertions.assertEquals(0, data.getUnsignedLong("default_member_permissions"));
+
+        command.setDefaultPermissions(DefaultMemberPermissions.ENABLED);
+        data = command.toData();
+        Assertions.assertTrue(data.isNull("default_member_permissions"));
+    }
+
+    @Test
+    public void testPrunePermissions()
+    {
+        CommandData command = new CommandDataImpl("prune", "prune messages from the channel")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED);
+        DataObject data = command.toData();
+
+        Assertions.assertEquals(0, data.getUnsignedLong("default_member_permissions"));
+
+        command.setDefaultPermissions(DefaultMemberPermissions.ENABLED);
+        data = command.toData();
+        Assertions.assertTrue(data.isNull("default_member_permissions"));
+    }
+
+
+
+    @Test
+    public void testBanCommannds()
     {
         CommandData command = new CommandDataImpl("ban", "Ban a user from this server")
                 .setGuildOnly(true)
@@ -165,13 +233,17 @@ public class SlasherTest {
     }
 
     @Test
-    public void testRequiredThrows()
+    public void testCommandError()
     {
         CommandDataImpl command = new CommandDataImpl("ban", "Simple ban command");
         command.addOption(OptionType.STRING, "opt", "desc");
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> command.addOption(OptionType.STRING, "other", "desc", true));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> command.addOption(OptionType.STRING, "other", "desc", true));       
+    }
 
+
+    @Test
+    public void testSubCommandError(){
         SubcommandData subcommand = new SubcommandData("sub", "Simple subcommand");
         subcommand.addOption(OptionType.STRING, "opt", "desc");
         Assertions.assertThrows(IllegalArgumentException.class, () -> subcommand.addOption(OptionType.STRING, "other", "desc", true));
