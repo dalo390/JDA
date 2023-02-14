@@ -22,6 +22,27 @@ import java.util.ArrayList;
 
 public class SlasherTest {
     @Test
+    public void testSlashCommandAssignUserRole(){
+        CommandData command = new CommandDataImpl("assignrole", "assign user a role")
+                .addOptions(new OptionData(OptionType.USER, "user","the user to give role to",  true))
+                .addOptions(new OptionData(OptionType.ROLE, "role", "the role to be given", true));
+        DataObject data = command.toData();
+        Assertions.assertEquals("assignrole", data.getString("name"));
+        Assertions.assertEquals("assign user a role", data.getString("description"));
+
+        DataArray options = data.getArray("options");
+        DataObject option = options.getObject(0);
+        Assertions.assertTrue(option.getBoolean("required"));
+        Assertions.assertEquals("user", option.getString("name"));
+        Assertions.assertEquals("the user to give role to", option.getString("description"));
+
+        option = options.getObject(1);
+        Assertions.assertTrue(option.getBoolean("required"));
+        Assertions.assertEquals("role", option.getString("name"));
+        Assertions.assertEquals("the role to be given", option.getString("description"));
+
+    }
+    @Test
     public void testNormal()
     {
         CommandData command = new CommandDataImpl("ban", "Ban a user from this server")
