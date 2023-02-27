@@ -49,14 +49,14 @@ public class SlasherTest {
                 .addOptions(new OptionData(OptionType.STRING, "content", "What the bot should say", true));
         DataObject data = command.toData();
         Assertions.assertEquals("say", data.getString("name"));
-        Assertions.assertEquals("make the boy say what you want", data.getString("description"));
+        Assertions.assertEquals("make the bot say what you want", data.getString("description"));
 
         DataArray options = data.getArray("options");
         DataObject option = options.getObject(0);
         option = options.getObject(0);
         Assertions.assertTrue(option.getBoolean("required"));
         Assertions.assertEquals("content", option.getString("name"));
-        Assertions.assertEquals("the saying content back itself", option.getString("description"));
+        Assertions.assertEquals("What the bot should say", option.getString("description"));
 
     }
 
@@ -66,7 +66,7 @@ public class SlasherTest {
         CommandData command = new CommandDataImpl("prune", "prune messages from the channel")
         .setGuildOnly(true)
         .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MESSAGE_MANAGE))
-        .addOptions(new OptionData(OptionType.INTEGER, "amount", "How many messages to prune (Default 100)"));
+        .addOptions(new OptionData(OptionType.INTEGER, "amount", "How many messages to prune (Default 100)", true));
         DataObject data = command.toData();
         Assertions.assertEquals("prune", data.getString("name"));
         Assertions.assertEquals("prune messages from the channel", data.getString("description"));
