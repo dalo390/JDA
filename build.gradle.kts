@@ -139,6 +139,9 @@ dependencies {
     }
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("org.mockito:mockito-core:3.+")
+    testImplementation("org.mockito:mockito-junit-jupiter:3.+")
+
 }
 
 val compileJava: JavaCompile by tasks

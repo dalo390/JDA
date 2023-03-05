@@ -54,6 +54,7 @@ public class SlasherTest {
         DataArray options = data.getArray("options");
         DataObject option = options.getObject(0);
         option = options.getObject(0);
+        
         Assertions.assertTrue(option.getBoolean("required"));
         Assertions.assertEquals("content", option.getString("name"));
         Assertions.assertEquals("What the bot should say", option.getString("description"));
