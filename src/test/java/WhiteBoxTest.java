@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * expand testing coverage to include api/interactions/build/commands
+ * expand testing coverage to include api/interactions/build/OptionData
  */
 public class WhiteBoxTest
 {

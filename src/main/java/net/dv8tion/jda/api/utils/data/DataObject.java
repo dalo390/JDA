@@ -911,4 +911,32 @@ public class DataObject implements SerializableData
         throw new ParsingException(Helpers.format("Cannot parse value for %s into type %s: %s instance of %s",
                                                       key, type.getSimpleName(), value, value.getClass().getSimpleName()));
     }
+
+    @Nullable
+    public <T> T getNew(@Nonnull Class<T> type, @Nonnull String key, @Nullable Function<String, T> stringParse, @Nullable Function<Number, T> numberParse)
+    {
+        Object value = data.get(key);
+        if (value == null)
+            return null;
+        if (type.isInstance(value))
+        {
+            return type.cast(value);
+        }
+        if (type == String.class)
+            return type.cast(value.toString());
+        // attempt type coercion
+        return getNewCoercion(type, key, value, stringParse, numberParse);
+    }
+
+    @Nullable
+    public <T> T getNewCoercion(@Nonnull Class<T> type, @Nonnull String key, @Nonnull Object value, @Nullable Function<String, T> stringParse, @Nullable Function<Number, T> numberParse)
+    {
+        if (value instanceof Number && numberParse != null)
+            return numberParse.apply((Number) value);
+        else if (value instanceof String && stringParse != null)
+            return stringParse.apply((String) value);
+
+        throw new ParsingException(Helpers.format("Cannot parse value for %s into type %s: %s instance of %s",
+                key, type.getSimpleName(), value, value.getClass().getSimpleName()));
+    }
 }
