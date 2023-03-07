@@ -1,5 +1,3 @@
-package net.dv8tion.jda.entitystring;
-
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.exceptions.ParsingException;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
