@@ -250,8 +250,8 @@ public class SlasherTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> subcommand.addOption(OptionType.STRING, "other", "desc", true));
     }
 
-    //no handler exception - very first line gives command data implementation with no arguments
-    //command data implementation comes before assertions
+    //no handler exception
+    //name checks will check if there aren't a name, then there won't be a handler
     @Test
     public void testNameChecks()
     {
@@ -268,10 +268,7 @@ public class SlasherTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new SubcommandGroupData("valid_name", ""));
     }
 
-    //option no capitalizing or spaces
-    //invalid - because of invalid input types
-    //miss match of type 
-    //not no handler
+    //invalid input types or type mismatch. Different from no handler
     @Test
     public void testChoices()
     {
