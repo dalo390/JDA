@@ -34,7 +34,7 @@ import java.util.Objects;
  * A metadata record used for role connections.
  *
  * @see <a href="https://discord.com/developers/docs/tutorials/configuring-app-metadata-for-linked-roles" target="_blank">Configuring App Metadata for Linked Roles</a>
- * @see Role.RoleTags#/isLinkedRole()
+ * @see Role.RoleTags#isLinkedRole()
  */
 public class RoleConnectionMetadata implements SerializableData
 {
@@ -173,7 +173,7 @@ public class RoleConnectionMetadata implements SerializableData
     /**
      * Sets a {@link DiscordLocale language-specific} localization of this record's name.
      *
-     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA/#updateRoleConnectionMetadata(Collection)}.
+     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA#updateRoleConnectionMetadata(Collection)}.
      *
      * @param  locale
      *         The locale to associate the translated name with
@@ -200,7 +200,7 @@ public class RoleConnectionMetadata implements SerializableData
     /**
      * Sets multiple {@link DiscordLocale language-specific} localizations of this record's name.
      *
-     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA#/updateRoleConnectionMetadata(Collection)}.
+     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA#updateRoleConnectionMetadata(Collection)}.
      *
      * @param  map
      *         The map from which to transfer the translated names
@@ -224,7 +224,7 @@ public class RoleConnectionMetadata implements SerializableData
     /**
      * Sets a {@link DiscordLocale language-specific} localization of this record's description.
      *
-     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA#/updateRoleConnectionMetadata(Collection)}.
+     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA#updateRoleConnectionMetadata(Collection)}.
      *
      * @param  locale
      *         The locale to associate the translated description with
@@ -251,7 +251,7 @@ public class RoleConnectionMetadata implements SerializableData
     /**
      * Sets multiple {@link DiscordLocale language-specific} localizations of this record's description.
      *
-     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA#/updateRoleConnectionMetadata(Collection)}.
+     * <p>This change will not take effect in Discord until you update the role connection metadata using {@link JDA#updateRoleConnectionMetadata(Collection)}.
      *
      * @param  map
      *         The map from which to transfer the translated descriptions
