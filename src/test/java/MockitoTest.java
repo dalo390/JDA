@@ -1,5 +1,6 @@
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.mockito.Mock;
+import org.mockito.exceptions.base.MockitoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,6 +37,7 @@ public class MockitoTest {
     public void mockitoTestColor1() throws Exception {
         assertNotNull(color);
         EmbedBuilder realEmbed = new EmbedBuilder();
+        assertNotEquals(mockEmbed.setColor(color), realEmbed.setColor(color));
     }
 
 
@@ -50,8 +52,6 @@ public class MockitoTest {
     public void mockitoTestColorInt1() throws Exception {
         assertNotNull(col);
         EmbedBuilder realEmbed = new EmbedBuilder();
-        //assertEquals(realEmbed.setColor(col), mockEmbed.setColor(col));
+        assertNotEquals(mockEmbed.setColor(col), realEmbed.setColor(col));
     }
-
-
 }
